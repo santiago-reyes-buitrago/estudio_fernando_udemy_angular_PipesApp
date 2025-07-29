@@ -1,1 +1,80 @@
-<p>basic-page works!</p>
+<section class="mx-10">
+  <h1 class="text-2xl">Pipes Basicos</h1>
+</section>
+<div class="stats shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Lowercase Pipe</div>
+    <div class="stat-value text-primary">{{nameUpper() | lowercase}}</div>
+    <div class="stat-desc">{{nameUpper()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">UpperCase Pipe</div>
+    <div class="stat-value text-secondary">{{nameLower() | uppercase}}</div>
+    <div class="stat-desc">{{nameLower()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">TitleCase Pipe</div>
+    <div class="stat-value">{{fullName() | titlecase}}</div>
+    <div class="stat-desc">{{fullName()}}</div>
+  </div>
+</div>
+<div class="divider"></div>
+<section class="mx-10">
+  <h1 class="text-2xl">Pipes Basicos</h1>
+</section>
+<div class="stats shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Date Pipe</div>
+    <div class="stat-value text-primary">{{customDate() | date}}</div>
+    <div class="stat-desc">{{customDate()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Date|Long|GMT-6 Pipe</div>
+    <div class="stat-value text-primary">{{customDate() | date:'long':'GMT-6'}}</div>
+    <div class="stat-desc">{{customDate()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Date|short|GMT-4 Pipe</div>
+    <div class="stat-value text-primary">{{customDate() | date:'short':'GMT-4'}}</div>
+    <div class="stat-desc">{{customDate()}}</div>
+  </div>
+</div>
+<div class="divider"></div>
+<section class="mx-10">
+  <h1 class="text-2xl">Pipes Basicos</h1>
+</section>
+<div class="stats shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Date Pipe</div>
+    <div class="stat-value text-primary">{{customDate() | date:'dd/MM/yyyy'}}</div>
+    <div class="stat-desc">{{customDate()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Date|Long|GMT-6 Pipe</div>
+    <div class="stat-value text-primary">{{customDate() | date:'HH:mm:ss'}}</div>
+    <div class="stat-desc">{{customDate()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Date|short|GMT-4 Pipe</div>
+    <div class="stat-value text-primary">{{customDate() | date:'EEEE d, MMMM'}}</div>
+    <div class="stat-desc">{{customDate()}}</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="flex flex-row gap-2">
+  <h1 class="text-2xl font-bold">
+    Locale Actual:
+    <span class="badge badge-secondary">ES</span>
+  </h1>
+  @for (language of ['Frances','Español','Ingles']; track language){
+    <button class="btn btn-primary">Cambiar a {{ language }}</button>
+  }
+</div>

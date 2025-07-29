@@ -1,1 +1,22 @@
-<p>numbers-page works!</p>
+<section class="mx-10">
+  <h1 class="text-2xl">Pipes Numericos</h1>
+</section>
+<div class="stats shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Number Pipe</div>
+    <div class="stat-value text-primary">{{totalSells() | number:'1.2-4'}}</div>
+    <div class="stat-desc">{{totalSells()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Currency Pipe</div>
+    <div class="stat-value">{{totalSells() | currency:'COP': 'symbol-narrow':'1.2-2'}}</div>
+    <div class="stat-desc">{{totalSells()}}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Percent Pipe</div>
+    <div class="stat-value">{{percent() | percent:'1.2-2'}}</div>
+    <div class="stat-desc">{{percent()}}</div>
+  </div>
+</div>
