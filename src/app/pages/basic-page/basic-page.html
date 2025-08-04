@@ -71,10 +71,10 @@
 
 <div class="flex flex-row gap-2">
   <h1 class="text-2xl font-bold">
-    Locale Actual:
-    <span class="badge badge-secondary">ES</span>
+    LocaleService Actual:
+    <span class="badge badge-secondary">{{currentLocale()}}</span>
   </h1>
-  @for (language of ['Frances','Español','Ingles']; track language){
-    <button class="btn btn-primary">Cambiar a {{ language }}</button>
+  @for (language of languages; track language.value){
+    <button class="btn btn-primary" (click)="changeLocale(language.value)">Cambiar a {{ language.language }}</button>
   }
 </div>
