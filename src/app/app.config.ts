@@ -13,6 +13,7 @@ registerLocaleData(localeFR,'fr');
 
 import { routes } from './app.routes';
 import {registerLocaleData} from '@angular/common';
+import {LocaleService} from './services/locale.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +22,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     {
       provide: LOCALE_ID,
-      useValue: 'fr'
+      // useValue: 'fr'
+      deps: [LocaleService],
+      useFactory: (LocaleService: LocaleService) => LocaleService.getLocale
     }
   ]
 };
