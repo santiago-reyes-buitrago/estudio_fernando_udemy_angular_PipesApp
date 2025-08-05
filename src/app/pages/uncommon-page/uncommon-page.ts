@@ -1,6 +1,15 @@
 import {Component, signal} from '@angular/core';
 import {Card} from '../../components/card/card';
-import {I18nPluralPipe, I18nSelectPipe} from '@angular/common';
+import {
+  AsyncPipe,
+  I18nPluralPipe,
+  I18nSelectPipe,
+  JsonPipe,
+  KeyValuePipe,
+  SlicePipe,
+  UpperCasePipe
+} from '@angular/common';
+import {interval, map, tap} from 'rxjs';
 
 const client1 = {
   name: 'Santiago',
@@ -17,13 +26,17 @@ const client2 = {
 }
 
 
-
 @Component({
   selector: 'app-uncommon-page',
   imports: [
     Card,
     I18nSelectPipe,
-    I18nPluralPipe
+    I18nPluralPipe,
+    SlicePipe,
+    JsonPipe,
+    UpperCasePipe,
+    KeyValuePipe,
+    AsyncPipe
   ],
   templateUrl: './uncommon-page.html',
   styleUrl: './uncommon-page.css'
@@ -36,8 +49,8 @@ export default class UncommonPage {
     female: 'invitarla'
   }
 
-  changeClient(){
-    if (this.client() ===  client1) {
+  changeClient() {
+    if (this.client() === client1) {
       this.client.set(client2)
       return;
     }
@@ -50,10 +63,30 @@ export default class UncommonPage {
     '=1': 'hay un cliente esperando',
     other: 'hay # clientes esperando',
   })
-  clients = signal<string[]>(['Maria','Pedro','Santiago','Melisa','Natalia','Andrea','Juan','Carlos'])
+  clients = signal<string[]>(['Maria', 'Pedro', 'Santiago', 'Melisa', 'Natalia', 'Andrea', 'Juan', 'Carlos'])
 
-  deleteClient()
-  {
+  deleteClient() {
     this.clients.update((prev) => prev.slice(1))
   }
+
+  // keyValuePipe
+  profile = {
+    name: 'Santiago',
+    age: 30,
+    address: 'Ottawa, Canada'
+  }
+
+  // asyncPipe
+  promiseValue: Promise<string> = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Hola mundo')
+      // reject('error')
+      console.log('Promesa finalizada')
+    }, 3500)
+  })
+
+  MyObservableTimer  = interval(2000).pipe(
+    map(value =>  value+1),
+    tap(value => console.log('tap',value))
+  );
 }

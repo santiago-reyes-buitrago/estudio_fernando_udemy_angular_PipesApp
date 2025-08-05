@@ -4,12 +4,12 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   <uncommon-card title="I18nSelect Pipe">
-    <p>saludos {{client().name}}, es un placer {{client().gender | i18nSelect:invitationMap}} a nuestro evento</p>
+    <p>saludos {{ client().name }}, es un placer {{ client().gender | i18nSelect:invitationMap }} a nuestro evento</p>
     <button (click)="changeClient()" class="btn btn-primary">prueba</button>
   </uncommon-card>
 
   <uncommon-card title="I18nPlural Pipe">
-    <p>Actualmente {{clients().length | i18nPlural:clientsMap()}}</p>
+    <p>Actualmente {{ clients().length | i18nPlural:clientsMap() }}</p>
     <button
       [disabled]="clients().length === 0"
       (click)="deleteClient()" class="btn btn-primary">
@@ -18,11 +18,42 @@
   </uncommon-card>
 
   <uncommon-card title="Slice Pipe">
-    <p>Actualmente {{clients().length | i18nPlural:clientsMap()}}</p>
-    <button
-      [disabled]="clients().length === 0"
-      (click)="deleteClient()" class="btn btn-primary">
-      Borrar Cliente
-    </button>
+    <p><strong>original</strong> <br/> <span class="text-primary">{{ clients().join(", ") }}</span></p>
+    <b class="mt-2">Slica:0:2</b>
+    <p class="text-primary">{{ clients() | slice:1:3 }}</p>
+  </uncommon-card>
+
+  <uncommon-card title="JsonPipe">
+    <pre class="text-primary">{{ clients() | json }}</pre>
+    <pre class="text-primary">{{ client() | json }}</pre>
+    <pre class="text-primary">{{ clients().join(", ") | json | uppercase }}</pre>
+  </uncommon-card>
+
+  <uncommon-card title="KeyValuePipe">
+    <pre>{{ profile | keyvalue | json }}</pre>
+    <ul>
+      @for (item of profile | keyvalue; track $index) {
+        <li>
+          <span>
+            <strong class="text-primary">{{ item.key }}</strong>
+            {{ item.value }}
+          </span>
+        </li>
+      }
+    </ul>
+  </uncommon-card>
+  <uncommon-card title="AsyncPipe">
+    @if (promiseValue | async; as value) {
+      <p class="text-primary">{{ value }}</p>
+    } @else {
+      <p class="text-accent">Error...</p>
+    }
+    <h3>Obsevable</h3>
+<!--    <p>{{MyObservableTimer | async}}</p>-->
+    @if (MyObservableTimer | async; as value){
+      <p class="text-primary">{{ value }}</p>
+    } @else {
+      <p>Esperando primer valor</p>
+    }
   </uncommon-card>
 </div>
