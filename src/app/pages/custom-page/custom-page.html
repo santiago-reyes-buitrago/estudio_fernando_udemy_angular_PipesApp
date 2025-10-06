@@ -1,3 +1,75 @@
-<uncommon-card title="Custom Pipes">
-  <p>{{ 'custom - page works!' | toogleCase:true }}</p>
+<uncommon-card title="Pipes Personalizados">
+  <p>{{ 'custom - page works!' | toogleCase:flag() }}</p>
+
+  <button class="btn btn-primary" (click)="handleFlag()">toogleCase</button>
+
+  <div class="divider my-2"></div>
+
+  <section>
+    <h1 class="text-2xl font-bold">Pipes personalizados en accion.</h1>
+    <div class="flex gap-2 justify-end w-full my-2">
+      <button class="btn btn-primary">
+        por Nombre
+      </button>
+      <button class="btn btn-accent">
+        por puede volar
+      </button>
+      <button class="btn btn-secondary">
+        por color
+      </button>
+      <button class="btn btn-info">
+        por creador
+      </button>
+    </div>
+  </section>
+
+  <section class="overflow-x-auto w-full">
+    <table class="table table-xs">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Puede Volar</th>
+        <th>Color</th>
+        <th>Creador</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (hero of heroes(); track hero.id){
+          <tr>
+            <td>{{hero.id}}</td>
+            <td>{{hero.name}}</td>
+            <td>
+              <span class="text-xs w-44"
+                    [class.text-success]="hero.canFly"
+                    [class.text-accent]="!hero.canFly"
+              >
+                {{hero.canFly | booleanResponseCase:'Puede Volar':'No Puede Volar'}}
+              </span>
+            </td>
+            <td>
+              <span [style.background-color]="hero.color | colorMap">
+                {{hero.color | color}}
+              </span>
+            </td>
+            <td>{{hero.creator}}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4">No se encontro informacion.</td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Puede Volar</th>
+        <th>Color</th>
+        <th>Creador</th>
+      </tr>
+      </tfoot>
+    </table>
+  </section>
+
 </uncommon-card>
