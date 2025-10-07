@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BooleanResponseCasePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: unknown, ...args: unknown[]): string {
     const [msgTrue,msgFalse] = args;
-    return value ? msgTrue : msgFalse;
+    return value ? msgTrue as string : msgFalse as string;
   }
 
 }

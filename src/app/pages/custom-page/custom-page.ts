@@ -6,6 +6,9 @@ import {Hero} from '../../interfaces/hero.interface';
 import {BooleanResponseCasePipe} from '../../pipes/boolean-response-case-pipe';
 import {ColorPipe} from '../../pipes/color-pipe';
 import {ColorMapPipe} from '../../pipes/color-map-pipe';
+import {TitleCasePipe} from '@angular/common';
+import {HeroSortByPipe} from '../../pipes/hero-sort-by-pipe';
+import {HeroFilterPipe} from '../../pipes/hero-filter-pipe';
 
 @Component({
   selector: 'custom-page',
@@ -14,7 +17,10 @@ import {ColorMapPipe} from '../../pipes/color-map-pipe';
     ToogleCasePipe,
     BooleanResponseCasePipe,
     ColorPipe,
-    ColorMapPipe
+    ColorMapPipe,
+    TitleCasePipe,
+    HeroSortByPipe,
+    HeroFilterPipe
   ],
   templateUrl: './custom-page.html',
   styleUrl: './custom-page.css'
@@ -22,7 +28,12 @@ import {ColorMapPipe} from '../../pipes/color-map-pipe';
 export default class CustomPage {
   flag = signal<boolean>(false);
   heroes = signal<Hero[]>(heroes);
+  sortBy = signal<keyof Hero|null>(null)
+  search = signal<string>('')
 
+  handleSortBy(sortBy:keyof Hero|null){
+    this.sortBy.set(sortBy);
+  }
 
   handleFlag(){
     this.flag.update(flag => !flag);
